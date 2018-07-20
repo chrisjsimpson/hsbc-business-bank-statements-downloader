@@ -9,4 +9,11 @@ download it and place it in /usr/bin or /usr/local/bin. https://github.com/mozil
 
 `python main.py`
 
+It will ask for a code, this is the code the smart card reader HSBC bank users
+use to login to their online bank, with their pin number; it generates a 
+time-bound login key. 
+
+You'll note the `memorableAnswerelm` is empty, and usually the password (fetch
+this from somehwere , don't hardcode it).
+
 
