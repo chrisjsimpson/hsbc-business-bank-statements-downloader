@@ -25,7 +25,7 @@ usernamelm.send_keys('SESHI' + Keys.RETURN)
 browser.implicitly_wait(10) # seconds
 
 memorableAnswerelm = browser.find_element_by_id('memorableAnswer')
-memorableAnswerelm.send_keys('')
+memorableAnswerelm.send_keys(os.getenv('memorable'))
 
 
 
