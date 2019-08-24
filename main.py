@@ -57,11 +57,6 @@ def calculate_num_statement_pagination_pages():
 
   Link 1 is not a hyperlink until navigating to another page
   (because each page is implemented as a html <input> for some reason.
-  +-------------+    
-  |             |    
-  |  1  2  3    |    
-  |     -  -    |    
-  +-------------+  
   """
 
   # Get the next page links (which are <input> elements)
@@ -133,22 +128,27 @@ def goto_statements_page_number(pageNumber=0):
   # "Next Statements" btn
   goto_list_of_accounts_with_statements()
   goto_account_statements_list()
-  if pageNumber != 0: # Only go to next page when pageNumer isn't 0
-    nextStatementsElm = browser.find_elements_by_css_selector('.button.act.hsbcBibButtonStyle01B2GUpdate.BIBHistStmts-no-js-show')[3]
-    nextStatementsElm.click() 
+  if pageNumber != 1: # Only go to next page when pageNumer isn't 0
+    # Press "Next Statements" until we get to pageNumber.
+    for count in range(1, pageNumber):
+      nextStatementsElm = browser.find_elements_by_css_selector('.button.act.hsbcBibButtonStyle01B2GUpdate.BIBHistStmts-no-js-show')[3]
+      nextStatementsElm.click() 
   
   
 
 login()
 goto_list_of_accounts_with_statements()
 goto_account_statements_list()
-calculate_num_statement_pagination_pages()
-download_statements_on_page(pageNumber=0)
-if next_statements_page_exists():
-  goto_list_of_accounts_with_statements()
-  goto_account_statements_list()
-  goto_statements_page_number(pageNumber=2)
-  download_statements_on_page(pageNumber=2)
+numPages = calculate_num_statement_pagination_pages()
+pageNumber = 1 # start at page 1
+download_statements_on_page(pageNumber=1)
+while pageNumber <= numPages:
+  if next_statements_page_exists():
+    goto_list_of_accounts_with_statements()
+    goto_account_statements_list()
+    goto_statements_page_number(pageNumber)
+    download_statements_on_page(pageNumber)
+    pageNumber += 1
 
 browser.close()  
 exit(1)
