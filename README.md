@@ -3,6 +3,10 @@
 Automatically download all statements in csv format.
 Defaults to top level account only
 
+Works well with: https://github.com/chrisjsimpson/hsbc-business-csv-statement-processor
+to process all of the statements and glean meaningful info (total income/out per 
+year/month) etc
+
 ## Setup 
 
 - you need:
